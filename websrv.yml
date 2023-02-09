@@ -1,0 +1,8 @@
+- hosts: 164.92.84.246
+
+  tasks:
+    - name: remove git
+      ansible.builtin.apt:
+        pkg: git
+        state: absent
+      become: true
