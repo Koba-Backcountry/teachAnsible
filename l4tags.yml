@@ -1,0 +1,48 @@
+- hosts: 164.92.84.246
+
+  tasks:
+    - name: update apt cache
+      ansible.builtin.apt:
+        update_cache: yes
+      become: yes
+      tags: update
+
+    - name: install git
+      ansible.builtin.apt:
+        name: git
+        state: present
+        update_cache: yes
+      become: yes
+      tags: git
+
+    - name: install Nodejs
+      ansible.builtin.apt:
+        update_cache: yes
+        name: nodejs
+        state: present
+      become: yes
+      tags: nodejs
+
+    - name: add user arya
+      ansible.builtin.user:
+        name: arya
+        password: "{{ 'password' | password_hash('sha512', 'arya') }}"
+        state: present
+      become: yes
+      tags: arya
+
+    - name: add user sansa
+      ansible.builtin.user:
+        name: sansa
+        password: "{{ 'password' | password_hash('sha512', 'sansa') }}"
+        state: present
+      become: yes
+      tags: sansa
+
+    - name: add user tirion
+      ansible.builtin.user:
+        name: tirion
+        password: "{{ 'password' | password_hash('sha512', 'tirion') }}"
+        state: present
+      become: yes
+      tags: tirion
