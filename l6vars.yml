@@ -1,0 +1,32 @@
+- hosts: 164.92.84.246
+  vars:
+    nginx_port: 80
+    root_dir: /usr/share/nginx/html
+
+  tasks:
+    - name: install nginx
+      ansible.builtin.apt:
+        name: nginx
+        state: latest
+      become: yes
+
+    - name: copy index.html
+      ansible.builtin.copy:
+        src: files/index.html
+        dest: "{{root_dir}}/index.html"
+      become: yes
+
+    - name: copy nginx.conf
+      ansible.builtin.template:
+        src: files/nginx.conf
+        dest: /etc/nginx/nginx.conf
+      notify:
+        - restart nginx
+      become: yes
+
+  handlers:
+    - name: restart nginx
+      ansible.builtin.service:
+        name: nginx
+        state: reloaded
+      become: yes
