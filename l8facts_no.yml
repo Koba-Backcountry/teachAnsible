@@ -1,0 +1,16 @@
+- hosts: 164.92.84.246
+  gather_facts: no
+
+  tasks:
+    - name: install git
+      ansible.builtin.apt:
+        name: git
+        state: present
+        update_cache: yes
+      become: yes
+
+    - name: remove git
+      ansible.builtin.apt:
+        pkg: git
+        state: absent
+      become: true
