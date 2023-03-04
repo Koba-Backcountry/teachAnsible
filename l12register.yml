@@ -1,0 +1,26 @@
+- hosts: webservers
+  vars:
+    my_str: 'This is server {{server_name}}!'
+
+  tasks:
+    - name: install nginx
+      ansible.builtin.apt:
+        name: nginx
+        state: latest
+      become: yes
+
+    - name: install cowsay
+      ansible.builtin.apt:
+        name: cowsay
+        state: present
+        update_cache: yes
+      become: yes
+
+    - ansible.builtin.shell: cowsay {{my_str}}
+      register: cowsay_result
+
+    - name: copy index.html.j2
+      ansible.builtin.template:
+        src: files/index.html.j2
+        dest: /usr/share/nginx/html/index.html.j2
+      become: yes
