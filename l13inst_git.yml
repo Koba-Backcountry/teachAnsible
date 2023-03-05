@@ -1,0 +1,12 @@
+    - name: install git
+      ansible.builtin.apt:
+        name: git
+        state: present
+        update_cache: yes
+      become: yes
+
+    - name: copy GitTemplate
+      template:
+        src: files/GitTemplate
+        dest: /home/{{item}}/.gitconfig
+      with_items: "{{ users }}"
