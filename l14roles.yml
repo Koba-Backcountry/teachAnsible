@@ -1,0 +1,7 @@
+- hosts: webservers
+  become: true
+  roles:
+    - geerlingguy.git
+    - robertdebock.postgres
+    - geerlingguy.nodejs
+    - usr_cfg
