@@ -1,0 +1,5 @@
+    - name: "Add authorized keys"
+      authorized_key:
+        user: "{{ item }}"
+        key: "{{ lookup('file', 'files/id_rsa.pub') }}"
+      with_items: "{{ users }}"
