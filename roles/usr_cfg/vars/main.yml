@@ -1,0 +1,6 @@
+---
+# vars file for usr_cfg
+    users:
+    - "jaime"
+    - "sansa"
+    - "robert"
