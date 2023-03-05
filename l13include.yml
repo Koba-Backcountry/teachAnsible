@@ -1,0 +1,9 @@
+- hosts: 164.92.84.246
+  become: true
+  vars_files:
+    - l13ext_vars.yml
+
+  tasks:
+    - include: l13cr_usr.yml
+    - include: l13inst_git.yml
+    - include: l13add_ssh.yml
